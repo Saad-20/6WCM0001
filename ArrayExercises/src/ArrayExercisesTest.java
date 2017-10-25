@@ -1,21 +1,28 @@
+import java.util.Scanner;
+
 public class ArrayExercisesTest {
     private static boolean wait = true;
+    private static boolean[] tests = {false, false, false, false};
+    private static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args){
         ArrayExercises arrayExercises = new ArrayExercises();
-        for (String s: args) {
-            if (s.equals("-y")){
-                wait = false;
-            }
+        parseArgs(args);
+        if (!tests[0] || tests[1]){
+            System.out.println("Testing the MonthLength method");
+            monthLengthTest(arrayExercises);
+            waitForNextLine();
         }
-        System.out.println("Testing the MonthLength method");
-        monthLengthTest(arrayExercises);
-        waitForNextLine();
-        System.out.println("Testing the testMarks method");
-        testMarksTest(arrayExercises);
-        waitForNextLine();
-        System.out.println("Testing the numVowels method");
-        numVowelsTest(arrayExercises);
-        waitForNextLine();
+        if (!tests[0] || tests[2]){
+            System.out.println("Testing the testMarks method");
+            testMarksTest(arrayExercises);
+            waitForNextLine();
+        }
+        if (!tests[0] || tests[3]) {
+            System.out.println("Testing the numVowels method");
+            numVowelsTest(arrayExercises);
+            waitForNextLine();
+        }
     }
 
     private static void monthLengthTest(ArrayExercises a){
@@ -63,9 +70,40 @@ public class ArrayExercisesTest {
     private static void waitForNextLine(){
         if (wait){
             System.out.println("Press Enter to continue...");
-            try {
-                System.in.read();
-            } catch (Exception e){}
+            scanner.nextLine();
+        }
+    }
+
+    private static void parseArgs(String[] args){
+        for (String s: args) {
+            if (s.equals("-y")){
+                wait = false;
+            }
+            else if (s.equals("-t")){
+                tests[0] = true;
+            }
+            else if (s.equals("--months")){
+                tests[1] = true;
+            }
+            else if (s.equals("--marks")){
+                tests[2] = true;
+            }
+            else if (s.equals("--vowels")){
+                tests[3] = true;
+            }
+            else if (s.equals("-h")){
+                System.out.println("Usage: Java ArrayExercisesTest [OPTIONS]");
+                System.out.println("ArrayExercises Test, a set of test routines for the ArrayExercises Class from the 6WCM0001 Module, part of the University of Hertfordshire Computer Science MSc Program");
+                System.out.println("The ArrayExercises class file must be in the same directory as this class file");
+                System.out.println("Arguments (must be separate):");
+                System.out.println("-h          Prints this help and exits");
+                System.out.println("-y          Runs through the program without pausing");
+                System.out.println("-t          Only runs specified tests");
+                System.out.println("--months    Runs the months test (must be used with the -t option)");
+                System.out.println("--marks     Runs the marks test (must be used with the -t option)");
+                System.out.println("--vowels    Runs the vowels test (must be used with the -t option)");
+                System.exit(0);
+            }
         }
     }
 
