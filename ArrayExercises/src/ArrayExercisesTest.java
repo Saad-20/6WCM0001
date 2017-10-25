@@ -38,8 +38,8 @@ public class ArrayExercisesTest {
         System.out.println("Expected - 4,5,3,6");
         a.testMarks(new int[]{0,24,25,49,50,74,75,100,13,15,28,58,27,32,78,82,98,79});
         System.out.println("Trying with an array with any positive integers:");
-        System.out.println("Expected - 1,2,1,1 (3 elements not counted)");
-        a.testMarks(new int[]{1,78,32,25,67, 19999, 2357, 264578});
+        System.out.println("Expected - 1,2,1,1 (4 elements not counted)");
+        a.testMarks(new int[]{1,78,32,25,67, 101, 19999, 2357, 264578});
         System.out.println("Trying with an array with negative integers");
         System.out.println("Expected - 1,2,1,1 (5 elements not counted)");
         a.testMarks(new int[]{1,78,32,25,67,-123, -1, -25, -198726, -100});
