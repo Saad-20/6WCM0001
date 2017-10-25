@@ -19,17 +19,17 @@ public class ArrayExercisesTest {
     }
 
     private static void monthLengthTest(ArrayExercises a){
-        final String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        final String[] months = {"January (31)", "February (28)", "March (31)", "April (30)", "May (31)", "June (30)", "July (31)", "August (31)", "September (30)", "October (31)", "November (30)", "December (31)"};
         for(int i=1; i<=12; i++){
             System.out.println("Testing for " + months[i-1] + ": " + a.monthLength(i));
         }
-        System.out.println("Testing for leap year: " + a.monthLength(2, true));
-        System.out.println("Testing for non leap year: " + a.monthLength(2, false));
-        System.out.println("Testing for non-feb in a leap year: " + a.monthLength(1, true));
-        System.out.println("Testing for out of bounds arguments (13): " + a.monthLength(13));
-        System.out.println("Testing for out of bounds arguments (-2567): " + a.monthLength(-2567));
-        System.out.println("Testing for out of bounds arguments (0): " + a.monthLength(0));
-        System.out.println("Testing for out of bounds arguments (72357): " + a.monthLength(72357));
+        System.out.println("Testing for leap year (29): " + a.monthLength(2, true));
+        System.out.println("Testing for non leap year (28): " + a.monthLength(2, false));
+        System.out.println("Testing for January in a leap year (31): " + a.monthLength(1, true));
+        System.out.println("Testing for out of bounds (13) arguments (-1): " + a.monthLength(13));
+        System.out.println("Testing for out of bounds (-2567) arguments (-1): " + a.monthLength(-2567));
+        System.out.println("Testing for out of bounds (0) arguments (-1): " + a.monthLength(0));
+        System.out.println("Testing for out of bounds (72357) arguments (-1): " + a.monthLength(72357));
         System.out.println("We haven't crashed...");
     }
 
