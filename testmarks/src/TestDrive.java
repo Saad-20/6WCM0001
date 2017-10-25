@@ -1,11 +1,14 @@
 public class TestDrive {
     public static void main (String[] args){
+        System.out.println("Creating 2 new MarksArray objects (csm1 and csm2)");
         MarksArray csm1 = new MarksArray(new int[] {12, 45,34,78, 55, 63});
         MarksArray csm2 = new MarksArray(new int[] {15, 20, 45, 72, 63, 81, 100, 12, 17, 50});
+        System.out.println("Listing the marks in both objects");
         csm1.listMarks();
         System.out.println("---------");
-        System.out.println(csm1.meanMark());
-        System.out.println("---------");
+        csm2.listMarks();
+        nextLine();
+        System.out.println("Modifying some marks in csm1");
         csm1.put(10, 20);
         csm1.put(2,40);
         csm1.put(6,200);
@@ -41,5 +44,11 @@ public class TestDrive {
         System.out.println("---------");
         System.out.println(csm1.bestStudent());
         System.out.println(csm2.bestStudent());
+    }
+    private static void nextLine(){
+        System.out.println("Press Enter to continue...");
+        try {
+            System.in.read();
+        } catch (Exception e){}
     }
 }

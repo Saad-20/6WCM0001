@@ -6,13 +6,13 @@ public class MarksArray {
     }
 
     public void put(int index, int value){
-        if(this.marks.length > index){
+        if((this.marks.length > index) && !(index < 0) ){
             this.marks[index] = value;
         }
     }
 
     public int get(int index){
-        if(this.marks.length > index){
+        if((this.marks.length > index) && !(index < 0)){
             return this.marks[index];
         }
         else{
@@ -92,25 +92,30 @@ public class MarksArray {
     private int[] lowest(){
         int n = this.marks.length-1;
         int lowestSoFar = -1;
+        int lowestIndex = 0;
+        int index = 0;
         for (int i : this.marks){
             if (i < lowestSoFar || lowestSoFar == -1){
                 lowestSoFar = i;
+                lowestIndex = index;
             }
+            index++;
         }
-        return new int[] {lowestSoFar, n};
+        return new int[] {lowestSoFar, lowestIndex};
     }
 
     private int[] highest(){
         int n = 0;
+        int highestIndex = 0;
         int highestSoFar = -1;
         while(n < this.marks.length){
             if(this.marks[n] > highestSoFar){
                 highestSoFar = this.marks[n];
+                highestIndex = n;
             }
             n++;
         }
-        n--;
-        return new int[] {highestSoFar,n};
+        return new int[] {highestSoFar,highestIndex};
     }
 
 }
