@@ -92,7 +92,7 @@ public class ArrayExercisesTest {
                 tests[3] = true;
             }
             else if (s.equals("-h")){
-                System.out.println("Usage: Java ArrayExercisesTest [OPTIONS]");
+                System.out.println("Usage: java ArrayExercisesTest [OPTIONS]");
                 System.out.println("ArrayExercises Test, a set of test routines for the ArrayExercises Class from the 6WCM0001 Module, part of the University of Hertfordshire Computer Science MSc Program");
                 System.out.println("The ArrayExercises class file must be in the same directory as this class file");
                 System.out.println("Arguments (must be separate):");
