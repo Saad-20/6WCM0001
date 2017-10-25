@@ -38,7 +38,7 @@ public class ArrayExercises {
     }
 
     /**
-     * takes an array of marks and returns the number within the ranges 0-24, 25-49, 50-74, 75-100. Marks outside these ranges
+     * takes an array of marks and prints the number within the ranges 0-24, 25-49, 50-74, 75-100. Marks outside these ranges
      * are ignored
      * @param marks an array of marks
      */
@@ -57,5 +57,57 @@ public class ArrayExercises {
         System.out.println("25-49: " + counter[1]);
         System.out.println("50-74: " + counter[2]);
         System.out.println("75-100: " + counter[3]);
+    }
+
+    /**
+     * Takes a string and prints the number of each vowel
+     * @param s the string to be tested
+     */
+    public void numVowels(String s){
+        int aCount = 0;
+        int eCount = 0;
+        int iCount = 0;
+        int oCount = 0;
+        int uCount = 0;
+        for(int i=0; i<s.length(); i++){
+            switch (s.charAt(i)){
+                case 'A':
+                case 'a':   aCount++;
+                            break;
+                case 'E':
+                case 'e':   eCount++;
+                            break;
+                case 'I':
+                case 'i':   iCount++;
+                            break;
+                case 'O':
+                case 'o':   oCount++;
+                            break;
+                case 'U':
+                case 'u':   uCount++;
+                            break;
+            }
+        }
+        System.out.println("There were:");
+        System.out.print(aCount + " A's ");
+        printStars(aCount);
+        System.out.println();
+        System.out.print(eCount + " E's ");
+        printStars(eCount);
+        System.out.println();
+        System.out.print(iCount + " I's ");
+        printStars(iCount);
+        System.out.println();
+        System.out.print(oCount + " O's ");
+        printStars(oCount);
+        System.out.println();
+        System.out.print(uCount + " U's ");
+        printStars(uCount);
+        System.out.println();
+    }
+    private void printStars(int numberOfStars){
+        for (int i = 0; i < numberOfStars; i++){
+            System.out.print("*");
+        }
     }
 }

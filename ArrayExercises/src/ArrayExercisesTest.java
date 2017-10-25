@@ -1,12 +1,12 @@
 public class ArrayExercisesTest {
     private static boolean wait = true;
     public static void main(String[] args){
+        ArrayExercises arrayExercises = new ArrayExercises();
         for (String s: args) {
             if (s.equals("-y")){
                 wait = false;
             }
         }
-        ArrayExercises arrayExercises = new ArrayExercises();
         System.out.println("Testing the MonthLength method");
         monthLengthTest(arrayExercises);
         waitForNextLine();
@@ -49,7 +49,15 @@ public class ArrayExercisesTest {
     }
 
     private static void numVowelsTest(ArrayExercises a){
-
+        String s1 = "\"The quick brown fox jumped over the lazy dog\"";
+        String s2 = "\"Ăngström the æthereal\"";
+        System.out.println("Trying with the string: " + s1 );
+        System.out.println("Expected: A: 1, E: 4 I: 1, O: 4, U: 2");
+        a.numVowels(s1);
+        System.out.println("Trying with the string: " + s2 );
+        System.out.println("Expected: A: 1, E: 3, I: 0, O: 0, U: 0");
+        a.numVowels(s2);
+        System.out.println("We haven't crashed...");
     }
 
     private static void waitForNextLine(){
