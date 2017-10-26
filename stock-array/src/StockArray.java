@@ -6,10 +6,8 @@ public class StockArray {
     }
 
     public void addNewStockItem(int index, String description, int price){
-        try{
+        if (index < stock.length && index >= 0){
             stock[index] = new StockItem(description, price);
-        } catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("invalid index chosen: " + e.getMessage() );
         }
     }
 
