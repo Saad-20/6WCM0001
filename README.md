@@ -18,3 +18,7 @@ java ArrayExercisesTest [OPTIONS]
 ```
 java ArrayExercisesTest -h
 ```
+
+## StockArray
+### Use
+This class and test class can be used in the same way to the ArrayExercises class and test above
