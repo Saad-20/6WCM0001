@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class StockArrayTest {
     private static Scanner scanner = new Scanner(System.in);
     private static boolean wait = true;
-    private static boolean[] tests;
 
     public static void main(String[] args){
         StockArray myStock = new StockArray(5);
