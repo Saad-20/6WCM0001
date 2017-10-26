@@ -60,5 +60,31 @@ public class Date
         if (i <10) {return "0" + i;}
         else {return "" + i;}
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        //check if this is itself
+        if (this == obj){
+            return true;
+        }
+        //check if null
+        else if (obj == null){
+            return false;
+        }
+        //check if same type
+        else if (obj.getClass() != this.getClass()){
+            return false;
+        }
+        //case to date and check if fields match
+        else{
+            Date date = (Date) obj;
+            if(date.day == this.day && date.month == this.month && date.year == this.year) {
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+    }
 }
 

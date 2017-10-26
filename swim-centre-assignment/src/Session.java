@@ -3,8 +3,8 @@ import java.util.*;
 /**
  * Class Session describes sessions organized by a swimming centre.
  * 
- * @author 
- * @version 
+ * @author Chris Pritchard
+ * @version 0.1
  */
 public class Session
 {
@@ -13,6 +13,7 @@ public class Session
     private double fee;
     public  Date startDate;
     private double totalFees;
+    private ArrayList<Member> members;
      
     public Session (String SessionCode, String description, 
                     double fee, Date date)
@@ -22,6 +23,7 @@ public class Session
         this.description = description;
         this.fee = fee;
         totalFees = 0;
+        members = new ArrayList<>();
      }
      
     public String getSessionCode () {return SessionCode;}
@@ -36,5 +38,16 @@ public class Session
         return SessionCode + separator + description + separator + 
                             "\nDate: " + startDate.toString() + 
                             "\nFee: " + fee + " Total fees: " + totalFees;
-    }            
+    }
+
+    public void signUp(Member member){
+        members.add(member);
+        totalFees = totalFees + fee;
+    }
+
+    public void showMembersOnSession(){
+        for ( Member member : members){
+            System.out.println(member.toString());
+        }
+    }
 }

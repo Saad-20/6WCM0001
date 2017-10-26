@@ -2,8 +2,8 @@ import java.awt.Color;
 /**
  * Write a description of class Tester here.
  * 
- * @author 
- * @version 
+ * @author Chris Pritchard
+ * @version  v0.1
  */
 public class Tester
 {
@@ -19,12 +19,23 @@ public class Tester
     private Member m4 = new Member (4, "Bodo Scholtz",'A');
     
     private Centre centre1 = new Centre("Hatfield");
-    
+
     public void doTest ()
     {
         System.out.println (m1.toString());
         System.out.println ("--------------------------");
         System.out.println (s2.toString());
+        s1.signUp(m1);
+        s1.signUp(m2);
+        s1.signUp(m3);
+        s1.signUp(m4);
+        s1.showMembersOnSession();
+        centre1.addSession(s1);
+        centre1.addSession(s2);
+        System.out.println(s1.toString());
+        centre1.searchSessionsByDate(date2);
+        centre1.searchSessionsByDate(new Date(1, 3, 2008));
+        centre1.cancelSession(s1);
     }
 }
 
