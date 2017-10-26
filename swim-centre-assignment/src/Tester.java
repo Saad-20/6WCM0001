@@ -36,6 +36,12 @@ public class Tester
         centre1.searchSessionsByDate(date2);
         centre1.searchSessionsByDate(new Date(1, 3, 2008));
         centre1.cancelSession(s1);
+        System.out.println(s1.startDate.compareTo(date1));
+        System.out.println(s1.startDate.compareTo(date2));
+        System.out.println(s2.startDate.compareTo(date1));
+        System.out.println(s2.startDate.compareTo(date2));
+        System.out.println(s1.startDate.compareTo(new Date(1, 3, 2008)));
+        System.out.println(date2.compareTo(new Date(19, 1, 1991)));
     }
 }
 

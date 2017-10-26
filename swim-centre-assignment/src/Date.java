@@ -5,7 +5,7 @@
  * @version Version 1.0 - 31/10/02 Amended by A.Marczyk 10/10/2003
  * 
  */
-public class Date
+public class Date implements Comparable
 {
     /** Fields of a Date - just the day, month and year*/
     private int day;
@@ -84,6 +84,44 @@ public class Date
             else{
                 return false;
             }
+        }
+    }
+
+    public int compareTo(Object obj){
+        if (this == obj){
+            return 0;
+        }
+        else if (obj == null){
+            throw new NullPointerException("obj must not be null");
+        }
+        else if (obj.getClass() != this.getClass()){
+            throw new ClassCastException("obj must be a Date object");
+        }
+        else{
+            Date date = (Date) obj;
+            if (date.year > this.year){
+                return 1;
+            }
+            else if(date.year < this.year){
+                return  -1;
+            }
+            else if(date.year == this.year){
+                if (date.month > this.month){
+                    return 1;
+                }
+                else if (date.month < this.month){
+                    return -1;
+                }
+                else if (date.month == this.month){
+                    if(date.day > this.day){
+                        return 1;
+                    }
+                    else if (date.day < this.day){
+                        return -1;
+                    }
+                }
+            }
+            return 0;
         }
     }
 }
