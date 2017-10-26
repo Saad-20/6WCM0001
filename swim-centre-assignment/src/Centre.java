@@ -29,7 +29,7 @@ public class Centre
         sessions.remove(sess.getSessionCode());
     }
 
-    /*
+
     public void searchSessionsByDate(Date date){
         sessions.forEach((code, session)->{
             if (session.startDate.equals(date)){
@@ -37,13 +37,13 @@ public class Centre
             }
         });
     }
-    */
-    public void searchSessionsByDate(Date date){
+
+    /*public void searchSessionsByDate(Date date){
         for(Session session: sessions.values()){
             if (session.startDate.equals(date)){
                 System.out.println(session.toString());
             }
         }
-    }
+    }*/
 
 }
