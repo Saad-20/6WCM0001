@@ -19,9 +19,9 @@ public class Date implements Comparable<Date>
      * Constructor for objects of class Date
      *
      * Sets the Date fields to (d, m, y) if these form a valid date, otherwise Date defaults to 01/01/1900.
-     * @param d - the day part of the date (1 &lt= d &lt= 31, depending on the month and (possibly!) year).
-     * @param m - the month part of the date (1 &lt= m &lt= 12).
-     * @param y - the year part of the date (y &gt= 1900).
+     * @param d - the day part of the date (1 &lt; d &lt; 31, depending on the month and (possibly!) year).
+     * @param m - the month part of the date (1 &lt; m &lt; 12).
+     * @param y - the year part of the date (y &gt; 1900).
      */
     public Date(int d, int m, int y)
     {
@@ -34,14 +34,30 @@ public class Date implements Comparable<Date>
     }
 
     /** Compares two dates for equality
-     * 
+     *
      * @return whether 'this' and 'other' parameter represent the same date
      */
-    public boolean equals (Date other)
+    @Override
+    public boolean equals (Object obj)
     {
-        return this.day == other.day && 
-               this.month == other.month &&
-               this.year == other.year;
+        if (this == obj){
+            return true;
+        }
+        //check if null
+        else if (obj == null){
+            return false;
+        }
+        //check if same type
+        else if (obj.getClass() != this.getClass()){
+            return false;
+        }
+        //cast to date and check if fields match
+        else{
+            Date other = (Date) obj;
+            return this.day == other.day &&
+                    this.month == other.month &&
+                    this.year == other.year;
+        }
     }
     
     /** Returns string representation of the date
@@ -55,14 +71,20 @@ public class Date implements Comparable<Date>
     
     
     /** is 'this' after/later than 'date'?
-     * 
+     *
+     * @param date the date to compare this with
      * @return whether this date comes after parameter date
      */
     public boolean isLater (Date date)
     {        
         return this.daysLater (date) > 0;
     }
-    
+
+    /**
+     * compares this Date to another Date
+     * @param other the Date object to compare to
+     * @return positive number of days if greater than the other date, 0 if they're the same and negative number of days if less than the other date
+     */
     public int compareTo (Date other)
     {
         return -this.daysLater (other);
@@ -76,7 +98,8 @@ public class Date implements Comparable<Date>
      *      d2.daysLater (d1) returns 157
      *      
      * Will return negative number if 'date' is after 'this'.
-     * 
+     *
+     * @param date the date to compare to
      * @return number of days this date is later than parameter date
      */
     public int daysLater (Date date)
@@ -94,7 +117,7 @@ public class Date implements Comparable<Date>
      * Example:  Date d1 = new Date (14, 7, 2004)
      *           Date d2 = d1.addDays (18);  // d2.toString() is "01/08/2004"
      *           
-     * precondition: numberOfDays >= 0
+     * precondition: numberOfDays &gt; 0
      */
     public Date addDays (int numberOfDays)
     {
