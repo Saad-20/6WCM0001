@@ -1,15 +1,27 @@
 package CustomerComplaintsSystemAssignment;
+import java.util.HashMap;
 import java.util.List;
 
 public class CCSImplementation implements CCS{
+
+    private HashMap<Integer, Submission> submissionMap;
+    private HashMap<Integer, Customer> customerMap;
+    private HashMap<Integer, Staff> staffMap;
+
+    /**
+     * Create's a new instance of the Customer Complaints System
+     */
+    public CCSImplementation() {
+    }
+
     @Override
     public void addComment(int submissionId, int customerId, String comment, Date date) {
-
+        submissionMap.put(submissionId, new Comment(submissionId, customerMap.get(customerId),comment, date ));
     }
 
     @Override
     public void addCustomer(int customerId, String name, String address, String email, String phone) {
-
+        customerMap.put(customerId, new Customer(customerId, name, address, email, phone));
     }
 
     @Override

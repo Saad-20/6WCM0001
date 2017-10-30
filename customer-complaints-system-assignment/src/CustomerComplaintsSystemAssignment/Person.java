@@ -1,5 +1,4 @@
 package CustomerComplaintsSystemAssignment;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Person{
 
@@ -11,11 +10,18 @@ public abstract class Person{
         this.name = name;
     }
 
-
+    /**
+     * Gets the ID of this person
+     * @return the person's ID
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Gets the name of this person
+     * @return the person's name
+     */
     public String getName() {
         return name;
     }
