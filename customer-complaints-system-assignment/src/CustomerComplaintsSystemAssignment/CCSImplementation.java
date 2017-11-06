@@ -84,8 +84,6 @@ public class CCSImplementation implements CCS{
     public List<Complaint> getNewComplaints(){
         List<Complaint> complaints = new ArrayList<>();
         List<Complaint> parallelComplaints = Collections.synchronizedList(complaints);
-        //don't care about order, so stream the map in parallel for performance
-        //using the forEach method to allow for this, as opposed to a for or enhanced for loop
         submissionMap.entrySet().parallelStream().forEach((e -> {
             if (e.getValue() instanceof Complaint){
                 Complaint c = (Complaint) e.getValue();
@@ -146,7 +144,7 @@ public class CCSImplementation implements CCS{
 
     @Override
     public void removeCustomer(int customerId) {
-
+        customerMap.remove(customerId);
     }
 
     private <K, E> List<E> getListFromMap(Map<K, E> map){
