@@ -1,17 +1,22 @@
 package CustomerComplaintsSystemAssignment;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class CCSImplementation implements CCS{
 
-    private HashMap<Integer, Submission> submissionMap;
-    private HashMap<Integer, Customer> customerMap;
-    private HashMap<Integer, Staff> staffMap;
+    //using maps rather than lists or sets as want to be able to access entries by their IDs
+    //HashMap seems to have the best performance
+    private Map<Integer, Submission> submissionMap;
+    private Map<Integer, Customer> customerMap;
+    private Map<Integer, Staff> staffMap;
 
     /**
      * Create's a new instance of the Customer Complaints System
      */
     public CCSImplementation() {
+        //initialise the maps - can use HashMap<>() as don't need to re-declare the types
+        submissionMap = new HashMap<>();
+        customerMap = new HashMap<>();
+        staffMap = new HashMap<>();
     }
 
     @Override
@@ -26,47 +31,53 @@ public class CCSImplementation implements CCS{
 
     @Override
     public void addGeneralComplaint(int submissionId, int customerId, String description, Date date) {
-
+        submissionMap.put(submissionId, new Complaint(submissionId, customerMap.get(customerId), description, date));
     }
 
     @Override
     public void addLiftComplaint(int submissionId, int customerId, String description, String lift, int floor, Date date) {
-
+        submissionMap.put(submissionId, new LiftComplaint(submissionId, customerMap.get(customerId), description, date, lift, floor));
     }
 
     @Override
     public void addStaff(int staffId, String name, String role, String department) {
-
+        staffMap.put(staffId, new Staff(staffId, name, department, role));
     }
 
     @Override
     public void addStaffComplaint(int submissionId, int customerId, String description, int staffId, Date date) {
-
+        submissionMap.put(submissionId, new StaffComplaint(submissionId, customerMap.get(customerId), description, date, staffMap.get(staffId)));
     }
 
     @Override
     public void archiveSubmissions() {
-
+        //TODO
     }
 
     @Override
     public void assignResolver(int complaintId, int staffId, Date deadline) {
-
+        Complaint complaint = (Complaint) submissionMap.get(complaintId);
+        complaint.setResolver(staffMap.get(staffId), deadline);
     }
 
     @Override
     public List<Action> getActionsForComplaint(int complaintId) {
-        return null;
+        Complaint complaint = (Complaint) submissionMap.get(complaintId);
+        return complaint.getActions();
     }
 
     @Override
     public Customer getCustomer(int customerId) {
-        return null;
+        return customerMap.get(customerId);
     }
 
     @Override
     public List<Customer> getCustomerList() {
-        return null;
+        List<Customer> customers = new ArrayList<>();
+        //don't care about order, so stream the map in parallel for performance
+        //using the forEach method to allow for this, as opposed to a for or enhanced for loop
+        customerMap.entrySet().parallelStream().forEach(e -> customers.add(e.getValue()));
+        return customers;
     }
 
     /**

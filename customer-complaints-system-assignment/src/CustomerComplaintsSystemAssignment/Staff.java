@@ -45,6 +45,7 @@ public class Staff extends Person {
      * @return the next available Staff ID
      */
     static int getNewId(){
+        //using the getAndIncrement() method of AtomicInteger to ensure thread safety / atomic transactions
         return nextId.getAndIncrement();
     }
 
