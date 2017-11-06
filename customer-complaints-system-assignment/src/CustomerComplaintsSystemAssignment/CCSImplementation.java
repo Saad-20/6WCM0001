@@ -73,11 +73,7 @@ public class CCSImplementation implements CCS{
 
     @Override
     public List<Customer> getCustomerList() {
-        List<Customer> customers = new ArrayList<>();
-        //don't care about order, so stream the map in parallel for performance
-        //using the forEach method to allow for this, as opposed to a for or enhanced for loop
-        customerMap.entrySet().parallelStream().forEach(e -> customers.add(e.getValue()));
-        return customers;
+        return getListFromMap(customerMap);
     }
 
     /**
@@ -86,57 +82,79 @@ public class CCSImplementation implements CCS{
      * @return a list of new complaints
      */
     public List<Complaint> getNewComplaints(){
-        return null;
+        List<Complaint> complaints = new ArrayList<>();
+        List<Complaint> parallelComplaints = Collections.synchronizedList(complaints);
+        //don't care about order, so stream the map in parallel for performance
+        //using the forEach method to allow for this, as opposed to a for or enhanced for loop
+        submissionMap.entrySet().parallelStream().forEach((e -> {
+            if (e.getValue() instanceof Complaint){
+                Complaint c = (Complaint) e.getValue();
+                if (c.getResolver() == null){
+                    parallelComplaints.add(c);
+                }
+            }
+        })
+        );
+        return complaints;
     }
 
     @Override
     public int getNewCustomerId() {
-        return 0;
+        return Customer.getNewId();
     }
 
     @Override
     public int getNewStaffId() {
-        return 0;
+        return Staff.getNewId();
     }
 
     @Override
     public int getNewSubmissionId() {
-        return 0;
+        return Submission.getNewId();
     }
 
     @Override
     public Staff getStaff(int staffId) {
-        return null;
+        return staffMap.get(staffId);
     }
 
     @Override
     public List<Staff> getStaffList() {
-        return null;
+        return getListFromMap(staffMap);
     }
 
     @Override
     public Submission getSubmission(int submissionId) {
-        return null;
+        return submissionMap.get(submissionId);
     }
 
     @Override
     public List<Submission> getSubmissionList() {
-        return null;
+        return getListFromMap(submissionMap);
     }
 
     @Override
     public void recordAction(int complaintId, String actionTaken, Date date) {
-
+        ((Complaint) submissionMap.get(complaintId)).recordAction(new Action(actionTaken, date));
     }
 
 
     @Override
     public void recordComplaintResolved(int complaintId) {
-
+        ((Complaint) submissionMap.get(complaintId)).complaintResolved();
     }
 
     @Override
     public void removeCustomer(int customerId) {
 
+    }
+
+    private <K, E> List<E> getListFromMap(Map<K, E> map){
+        List<E> list = new ArrayList<>();
+        List<E> parallelList = Collections.synchronizedList(list);
+        //don't care about order, so stream the map in parallel for performance
+        //using the forEach method to allow for this, as opposed to a for or enhanced for loop
+        map.entrySet().parallelStream().forEach(e -> parallelList.add(e.getValue()));
+        return list;
     }
 }

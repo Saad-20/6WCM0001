@@ -6,7 +6,7 @@ public class Complaint extends Submission {
     private ArrayList<Action> actions;
     private Staff resolver;
     private Date deadline;
-    boolean resolved;
+    private boolean resolved;
 
     public Complaint(int id, Customer customer, String description, Date date) {
         super(id, customer, description, date);

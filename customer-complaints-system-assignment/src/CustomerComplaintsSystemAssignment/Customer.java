@@ -44,7 +44,7 @@ public class Customer extends Person {
      * gets a new Customer ID
      * @return the next available customer ID
      */
-    public static int getNewId() {
+    static int getNewId() {
         return nextId.getAndIncrement();
     }
 }
