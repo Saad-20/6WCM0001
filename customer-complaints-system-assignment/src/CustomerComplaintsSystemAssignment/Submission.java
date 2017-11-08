@@ -1,25 +1,18 @@
 package CustomerComplaintsSystemAssignment;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-public abstract class Submission {
-    private static AtomicInteger nextId = new AtomicInteger();
+public abstract class Submission implements ID{
     private int id;
     private Customer customer;
     private String description;
     private Date date;
 
-    public Submission(int id, Customer customer, String description, Date date) {
+    Submission(int id, Customer customer, String description, Date date) {
         this.id = id;
         this.customer = customer;
         this.description = description;
         this.date = date;
     }
-
-    /**
-     *
-     * @return
-     */
+    @Override
     public int getId() {
         return id;
     }
@@ -28,7 +21,7 @@ public abstract class Submission {
      *
      * @return
      */
-    public Customer getCustomer() {
+    Customer getCustomer() {
         return customer;
     }
 
@@ -36,7 +29,7 @@ public abstract class Submission {
      *
      * @return
      */
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
@@ -44,15 +37,12 @@ public abstract class Submission {
      *
      * @return
      */
-    public Date getDate() {
+    Date getDate() {
         return date;
     }
 
-    /**
-     *
-     * @return
-     */
-    public static int getNewId(){
-        return nextId.getAndIncrement();
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

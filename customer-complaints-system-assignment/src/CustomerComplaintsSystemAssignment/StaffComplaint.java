@@ -10,4 +10,9 @@ public class StaffComplaint extends Complaint {
     public Staff getStaff(){
         return staff;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

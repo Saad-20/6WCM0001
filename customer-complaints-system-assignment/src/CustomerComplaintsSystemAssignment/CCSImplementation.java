@@ -73,7 +73,7 @@ public class CCSImplementation implements CCS{
 
     @Override
     public List<Customer> getCustomerList() {
-        return getListFromMap(customerMap);
+        return getSortedListFromMap(customerMap, new IdComparator());
     }
 
     /**
@@ -82,33 +82,41 @@ public class CCSImplementation implements CCS{
      * @return a list of new complaints
      */
     public List<Complaint> getNewComplaints(){
+        //wrapping the complaints list in a synchronizedList wrapper so that we can work in parallel \o/
         List<Complaint> complaints = new ArrayList<>();
         List<Complaint> parallelComplaints = Collections.synchronizedList(complaints);
         submissionMap.entrySet().parallelStream().forEach((e -> {
+            //As all submissions are in the same map, need to check if it's a Complaint (or one of its subclasses)
             if (e.getValue() instanceof Complaint){
+                //cast e to Complaint once we know we can!
                 Complaint c = (Complaint) e.getValue();
+                // check if a resolver is assigned, if not add it to the list
+                // have to do it this way as we can't just take the map.values() collection
+                // as we can below
                 if (c.getResolver() == null){
                     parallelComplaints.add(c);
                 }
             }
         })
         );
+        //Sort the list by Id
+        complaints.sort(new IdComparator());
         return complaints;
     }
 
     @Override
     public int getNewCustomerId() {
-        return Customer.getNewId();
+        return ID.getNewId();
     }
 
     @Override
     public int getNewStaffId() {
-        return Staff.getNewId();
+        return ID.getNewId();
     }
 
     @Override
     public int getNewSubmissionId() {
-        return Submission.getNewId();
+        return ID.getNewId();
     }
 
     @Override
@@ -118,7 +126,7 @@ public class CCSImplementation implements CCS{
 
     @Override
     public List<Staff> getStaffList() {
-        return getListFromMap(staffMap);
+        return getSortedListFromMap(staffMap, new IdComparator());
     }
 
     @Override
@@ -128,7 +136,7 @@ public class CCSImplementation implements CCS{
 
     @Override
     public List<Submission> getSubmissionList() {
-        return getListFromMap(submissionMap);
+        return getSortedListFromMap(submissionMap, new IdComparator());
     }
 
     @Override
@@ -147,12 +155,18 @@ public class CCSImplementation implements CCS{
         customerMap.remove(customerId);
     }
 
-    private <K, E> List<E> getListFromMap(Map<K, E> map){
-        List<E> list = new ArrayList<>();
-        List<E> parallelList = Collections.synchronizedList(list);
-        //don't care about order, so stream the map in parallel for performance
-        //using the forEach method to allow for this, as opposed to a for or enhanced for loop
-        map.entrySet().parallelStream().forEach(e -> parallelList.add(e.getValue()));
+    //generic function to create a list of values from a map
+    private <K, V> List<V> getListFromMap(Map<K, V> map){
+        return new ArrayList<>(map.values());
+    }
+
+    //generic function to return a sorted list from a map
+    //takes a Map<V> and a comparator that implements Comparator<V> and sorts on it
+    private <K, V> List<V> getSortedListFromMap(Map<K, V> map, Comparator<? super V> c){
+        List<V> list = getListFromMap(map);
+        //sort list on comparator c
+        list.sort(c);
         return list;
     }
+
 }

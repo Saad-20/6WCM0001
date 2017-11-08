@@ -8,4 +8,8 @@ public class Comment extends Submission {
         super(id, customer, description, date);
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

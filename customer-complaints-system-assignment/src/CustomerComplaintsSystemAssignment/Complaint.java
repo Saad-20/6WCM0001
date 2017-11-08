@@ -8,11 +8,11 @@ public class Complaint extends Submission {
     private Date deadline;
     private boolean resolved;
 
-    public Complaint(int id, Customer customer, String description, Date date) {
+    Complaint(int id, Customer customer, String description, Date date) {
         super(id, customer, description, date);
     }
 
-    public void recordAction(Action action){
+    void recordAction(Action action){
         actions.add(action);
     }
 
@@ -31,5 +31,22 @@ public class Complaint extends Submission {
 
     void complaintResolved(){
         resolved = true;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    /**
+     * Checks to see if the complaint is linked to a valid customer
+     * @throws CustomerNotFoundException if the customer does not exist in the CCS
+     * @param ccs the ccs implementation to check against
+     */
+    public void validateCustomer(CCS ccs) throws CustomerNotFoundException{
+        if(ccs.getCustomerList().contains(super.getCustomer())){
+            return;
+        }
+        else throw new CustomerNotFoundException(super.getCustomer().toString());
     }
 }
