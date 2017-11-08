@@ -86,6 +86,13 @@ public interface CCS {
     List<Action> getActionsForComplaint(int complaintId);
 
     /**
+     * Gets a list of all complaints
+     *
+     * @return a list of all complaints
+     */
+    List<Complaint> getComplaintList();
+
+    /**
      * get the customer with the specified id
      * @param customerId the customer id
      * @return the customer

@@ -82,7 +82,7 @@ public class CCSImplementation implements CCS{
      * @return a list of new complaints
      */
     public List<Complaint> getNewComplaints(){
-        //wrapping the complaints list in a synchronizedList wrapper so that we can work in parallel \o/
+        /*//wrapping the complaints list in a synchronizedList wrapper so that we can work in parallel \o/
         List<Complaint> complaints = new ArrayList<>();
         List<Complaint> parallelComplaints = Collections.synchronizedList(complaints);
         submissionMap.entrySet().parallelStream().forEach((e -> {
@@ -101,6 +101,22 @@ public class CCSImplementation implements CCS{
         );
         //Sort the list by Id
         complaints.sort(new IdComparator());
+        */
+        List<Complaint> newComplaints = new ArrayList<>();
+        List<Complaint> complaints;
+        complaints = getSortedListOfSubclassFromMap(submissionMap, Complaint.class, new IdComparator());
+        complaints.forEach(v -> {
+            if(v.getResolver() == null) {
+                newComplaints.add(v);
+            }
+        });
+        return newComplaints;
+    }
+
+    public List<Complaint> getComplaintList(){
+        //wrapping the complaints list in a synchronizedList wrapper so that we can work in parallel \o/
+        List<Complaint> complaints;
+        complaints = getSortedListOfSubclassFromMap(submissionMap, Complaint.class, new IdComparator());
         return complaints;
     }
 
@@ -164,6 +180,30 @@ public class CCSImplementation implements CCS{
     //takes a Map<V> and a comparator that implements Comparator<V> and sorts on it
     private <K, V> List<V> getSortedListFromMap(Map<K, V> map, Comparator<? super V> c){
         List<V> list = getListFromMap(map);
+        //sort list on comparator c
+        list.sort(c);
+        return list;
+    }
+
+    //generic function to return a list of subclasses from a map
+    private <K, V, N extends V> List<N> getListOfSubclassFromMap(Map<K, V> map, Class<N> subclass){
+        //wrapping the complaints list in a synchronizedList wrapper so that we can work in parallel \o/
+        List<N> list = new ArrayList<>();
+        List<N> parallelList = Collections.synchronizedList(list);
+        map.entrySet().parallelStream().forEach((e -> {
+            //As all submissions are in the same map, need to check if it's a Complaint (or one of its subclasses)
+            if (subclass.isInstance(e.getValue())) {
+                //cast e to Complaint once we know we can!
+                N c = subclass.cast(e.getValue());
+                parallelList.add(c);
+            }
+        }));
+        return list;
+    }
+
+    //generic function to return a sorted list of subclasses from a map
+    private <K, V, N extends V> List<N> getSortedListOfSubclassFromMap(Map<K, V> map, Class<N> subclass, Comparator<? super N> c){
+        List<N> list = getListOfSubclassFromMap(map, subclass);
         //sort list on comparator c
         list.sort(c);
         return list;
