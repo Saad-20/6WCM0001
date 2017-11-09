@@ -11,6 +11,10 @@ public class LiftComplaint extends Complaint {
 
     @Override
     public String toString() {
-        return super.toString();
+        StringBuilder sb = new StringBuilder("LIFT COMPLAINT\n");
+        sb.append(super.toString());
+        sb.append(", Lift: " + lift);
+        sb.append(", Floor: " + floor);
+        return sb.toString();
     }
 }

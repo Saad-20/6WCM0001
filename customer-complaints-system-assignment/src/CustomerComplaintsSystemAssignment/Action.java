@@ -18,6 +18,6 @@ public class Action {
 
     @Override
     public String toString() {
-        return "Action: ";
+        return "Action: " + action +", Date: "+ date.toString();
     }
 }

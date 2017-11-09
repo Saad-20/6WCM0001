@@ -39,7 +39,12 @@ public class Customer extends Person{
 
     @Override
     public String toString() {
-        return super.toString();
+        StringBuilder sb = new StringBuilder("CUSTOMER\n");
+        sb.append(super.toString());
+        sb.append(", Address: " + address);
+        sb.append(", Email: " + email);
+        sb.append(", Telephone: " + telephone);
+        return sb.toString();
     }
 
 }

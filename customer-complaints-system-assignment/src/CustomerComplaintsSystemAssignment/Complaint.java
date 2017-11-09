@@ -35,7 +35,11 @@ public class Complaint extends Submission {
 
     @Override
     public String toString() {
-        return super.toString();
+        String submissionString = super.toString() + "\n";
+        String complaintString = "Resolver:" + resolver.toString() + "\n";
+        String actionsString = "Actions:" + actionsString() + "\n";
+        String isResolved = "Resolved: " + resolved;
+        return submissionString + complaintString + actionsString + isResolved;
     }
 
     /**
@@ -48,5 +52,11 @@ public class Complaint extends Submission {
             return;
         }
         else throw new CustomerNotFoundException(super.getCustomer().toString());
+    }
+
+    private String actionsString(){
+        StringBuilder sb = new StringBuilder("\n");
+        actions.forEach(e -> sb.append(e.toString() + "\n"));
+        return sb.toString();
     }
 }

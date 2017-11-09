@@ -1,4 +1,5 @@
 package CustomerComplaintsSystemAssignment;
+import uk.co.christopherpritchard.MapToList.MapToCollection;
 import java.util.*;
 
 public class CCSImplementation implements CCS{
@@ -73,7 +74,7 @@ public class CCSImplementation implements CCS{
 
     @Override
     public List<Customer> getCustomerList() {
-        return getSortedListFromMap(customerMap, new IdComparator());
+        return new MapToCollection<>(customerMap).getSortedList(new IdComparator());
     }
 
     /**
@@ -82,42 +83,20 @@ public class CCSImplementation implements CCS{
      * @return a list of new complaints
      */
     public List<Complaint> getNewComplaints(){
-        /*//wrapping the complaints list in a synchronizedList wrapper so that we can work in parallel \o/
-        List<Complaint> complaints = new ArrayList<>();
-        List<Complaint> parallelComplaints = Collections.synchronizedList(complaints);
-        submissionMap.entrySet().parallelStream().forEach((e -> {
-            //As all submissions are in the same map, need to check if it's a Complaint (or one of its subclasses)
-            if (e.getValue() instanceof Complaint){
-                //cast e to Complaint once we know we can!
-                Complaint c = (Complaint) e.getValue();
-                // check if a resolver is assigned, if not add it to the list
-                // have to do it this way as we can't just take the map.values() collection
-                // as we can below
-                if (c.getResolver() == null){
-                    parallelComplaints.add(c);
-                }
-            }
-        })
-        );
-        //Sort the list by Id
-        complaints.sort(new IdComparator());
-        */
         List<Complaint> newComplaints = new ArrayList<>();
         List<Complaint> complaints;
-        complaints = getSortedListOfSubclassFromMap(submissionMap, Complaint.class, new IdComparator());
+        complaints = new MapToCollection<>(submissionMap).getListOfSubclass(Complaint.class);
         complaints.forEach(v -> {
             if(v.getResolver() == null) {
                 newComplaints.add(v);
             }
         });
+        newComplaints.sort(new IdComparator());
         return newComplaints;
     }
 
     public List<Complaint> getComplaintList(){
-        //wrapping the complaints list in a synchronizedList wrapper so that we can work in parallel \o/
-        List<Complaint> complaints;
-        complaints = getSortedListOfSubclassFromMap(submissionMap, Complaint.class, new IdComparator());
-        return complaints;
+        return new MapToCollection<>(submissionMap).getSortedListOfSubclass(Complaint.class, new IdComparator());
     }
 
     @Override
@@ -142,7 +121,7 @@ public class CCSImplementation implements CCS{
 
     @Override
     public List<Staff> getStaffList() {
-        return getSortedListFromMap(staffMap, new IdComparator());
+        return new MapToCollection<>(staffMap).getSortedList(new IdComparator());
     }
 
     @Override
@@ -152,7 +131,7 @@ public class CCSImplementation implements CCS{
 
     @Override
     public List<Submission> getSubmissionList() {
-        return getSortedListFromMap(submissionMap, new IdComparator());
+        return new MapToCollection<>(submissionMap).getSortedList(new IdComparator());
     }
 
     @Override
@@ -170,43 +149,4 @@ public class CCSImplementation implements CCS{
     public void removeCustomer(int customerId) {
         customerMap.remove(customerId);
     }
-
-    //generic function to create a list of values from a map
-    private <K, V> List<V> getListFromMap(Map<K, V> map){
-        return new ArrayList<>(map.values());
-    }
-
-    //generic function to return a sorted list from a map
-    //takes a Map<V> and a comparator that implements Comparator<V> and sorts on it
-    private <K, V> List<V> getSortedListFromMap(Map<K, V> map, Comparator<? super V> c){
-        List<V> list = getListFromMap(map);
-        //sort list on comparator c
-        list.sort(c);
-        return list;
-    }
-
-    //generic function to return a list of subclasses from a map
-    private <K, V, N extends V> List<N> getListOfSubclassFromMap(Map<K, V> map, Class<N> subclass){
-        //wrapping the complaints list in a synchronizedList wrapper so that we can work in parallel \o/
-        List<N> list = new ArrayList<>();
-        List<N> parallelList = Collections.synchronizedList(list);
-        map.entrySet().parallelStream().forEach((e -> {
-            //As all submissions are in the same map, need to check if it's a Complaint (or one of its subclasses)
-            if (subclass.isInstance(e.getValue())) {
-                //cast e to Complaint once we know we can!
-                N c = subclass.cast(e.getValue());
-                parallelList.add(c);
-            }
-        }));
-        return list;
-    }
-
-    //generic function to return a sorted list of subclasses from a map
-    private <K, V, N extends V> List<N> getSortedListOfSubclassFromMap(Map<K, V> map, Class<N> subclass, Comparator<? super N> c){
-        List<N> list = getListOfSubclassFromMap(map, subclass);
-        //sort list on comparator c
-        list.sort(c);
-        return list;
-    }
-
 }
