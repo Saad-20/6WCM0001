@@ -1,4 +1,4 @@
-package CollectionTools;
+package uk.co.christopherpritchard.CollectionTools;
 
 import java.util.*;
 
