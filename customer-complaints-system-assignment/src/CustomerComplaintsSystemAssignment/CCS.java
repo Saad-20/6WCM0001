@@ -1,6 +1,8 @@
 package CustomerComplaintsSystemAssignment;
 import java.util.List;
 
+//This is task 1
+
 /**
  * The CCS (Customer Complaints System) interface
  * @author Chris Pritchard
@@ -85,6 +87,7 @@ public interface CCS {
      */
     List<Action> getActionsForComplaint(int complaintId);
 
+    //This is a modification to the spec to allow for some additional flexibility
     /**
      * Gets a list of all complaints
      *

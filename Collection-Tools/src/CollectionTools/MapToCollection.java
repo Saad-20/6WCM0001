@@ -1,4 +1,4 @@
-package uk.co.christopherpritchard.MapToList;
+package CollectionTools;
 
 import java.util.*;
 

@@ -3,13 +3,14 @@ import java.util.*;
 
 public class Complaint extends Submission {
 
-    private ArrayList<Action> actions;
+    private List<Action> actions;
     private Staff resolver;
     private Date deadline;
     private boolean resolved;
 
     Complaint(int id, Customer customer, String description, Date date) {
         super(id, customer, description, date);
+        actions = new ArrayList<>();
     }
 
     void recordAction(Action action){
