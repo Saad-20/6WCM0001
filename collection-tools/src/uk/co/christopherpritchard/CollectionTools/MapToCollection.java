@@ -65,7 +65,7 @@ public class MapToCollection<K, V> {
         List<N> list = new ArrayList<>();
         List<N> parallelList = Collections.synchronizedList(list);
         this.map.entrySet().parallelStream().forEach((e -> {
-            //As all submissions are in the same map, need to check if it's a Complaint (or one of its subclasses)
+            //need to check if it's one of the subclasses)
             if (subclass.isInstance(e.getValue())) {
                 //cast e to Complaint once we know we can!
                 N c = subclass.cast(e.getValue());

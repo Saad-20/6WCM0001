@@ -1,7 +1,7 @@
 package CustomerComplaintsSystemAssignment;
 
 import java.util.*;
-import uk.co.christopherpritchard.CollectionTools.*;
+import uk.co.christopherpritchard.CollectionTools.MapToCollection;
 
 public class CCSImplementation implements CCS{
 

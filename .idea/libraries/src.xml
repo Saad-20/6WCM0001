@@ -3,7 +3,7 @@
     <CLASSES />
     <JAVADOC />
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/Collection-Tools/src" />
+      <root url="file://$PROJECT_DIR$/collection-tools/src" />
     </SOURCES>
   </library>
 </component>

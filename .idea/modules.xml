@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/6WCM0001.iml" filepath="$PROJECT_DIR$/6WCM0001.iml" />
       <module fileurl="file://$PROJECT_DIR$/ArrayExercises/ArrayExercises.iml" filepath="$PROJECT_DIR$/ArrayExercises/ArrayExercises.iml" />
+      <module fileurl="file://$PROJECT_DIR$/collection-tools/collection-tools.iml" filepath="$PROJECT_DIR$/collection-tools/collection-tools.iml" />
       <module fileurl="file://$PROJECT_DIR$/customer-complaints-system-assignment/customer-complaints-system-assignment.iml" filepath="$PROJECT_DIR$/customer-complaints-system-assignment/customer-complaints-system-assignment.iml" />
       <module fileurl="file://$PROJECT_DIR$/stock-array/stock-array.iml" filepath="$PROJECT_DIR$/stock-array/stock-array.iml" />
       <module fileurl="file://$PROJECT_DIR$/swim-centre-assignment/swim-centre-assignment.iml" filepath="$PROJECT_DIR$/swim-centre-assignment/swim-centre-assignment.iml" />
