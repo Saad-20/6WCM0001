@@ -7,7 +7,7 @@ import java.util.List;
  * The CCS (Customer Complaints System) interface (task 1)
  * @author Chris Pritchard
  * @version 1.0
- */
+  */
 public interface CCS {
     /**
      * Add a comment
@@ -89,7 +89,7 @@ public interface CCS {
 
     //This is a modification to the spec to allow for some additional flexibility
     /**
-     * Gets a list of all complaints
+     * Gets a list of all complaints (not in spec)
      *
      * @return a list of all complaints
      */

@@ -2,10 +2,12 @@ package CustomerComplaintsSystemAssignment;
 
 import java.io.FileOutputStream;
 import java.util.*;
-import uk.co.christopherpritchard.CollectionTools.MapToCollection;
+
+//Separated the collection tools out into a different package to enable code reuse
+import CollectionTools.MapToCollection;
 
 /**
- * CCS Implementation (extends the CCS interface and implements methods) - task 2
+ * CCS Implementation (extends the CCS interface and implements methods) - Task 2
  */
 public class CCSImplementation implements CCS{
 
@@ -63,6 +65,7 @@ public class CCSImplementation implements CCS{
         submissionMap.forEach((k, v) -> {
             if (v.isArchivable()){
                 archivedSubmissions.put(k, v);
+                submissionMap.remove(k);
             }
         });
     }
@@ -90,7 +93,7 @@ public class CCSImplementation implements CCS{
     }
 
     /**
-     * Gets a list of new complaints
+     * Gets a list of new complaints (complaints without a resolver assigned)
      *
      * @return a list of new complaints
      */
@@ -161,5 +164,4 @@ public class CCSImplementation implements CCS{
     public void removeCustomer(int customerId) {
         customerMap.remove(customerId);
     }
-    W
 }

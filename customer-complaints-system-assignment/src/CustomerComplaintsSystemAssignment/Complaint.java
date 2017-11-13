@@ -1,6 +1,9 @@
 package CustomerComplaintsSystemAssignment;
 import java.util.*;
 
+/**
+ *
+ */
 public abstract class Complaint extends Submission {
 
     private List<Action> actions;
@@ -8,28 +11,55 @@ public abstract class Complaint extends Submission {
     private Date deadline;
     private boolean resolved;
 
+    /**
+     *
+     * @param id
+     * @param customer
+     * @param description
+     * @param date
+     */
     Complaint(int id, Customer customer, String description, Date date) {
         super(id, customer, description, date);
         actions = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param action
+     */
     void recordAction(Action action){
         actions.add(action);
     }
 
+    /**
+     *
+     * @param staff
+     * @param deadline
+     */
     void setResolver(Staff staff, Date deadline){
         this.resolver = staff;
         this.deadline = deadline;
     }
 
+    /**
+     *
+     * @return
+     */
     Staff getResolver(){
         return resolver;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Action> getActions(){
         return actions;
     }
 
+    /**
+     *
+     */
     void complaintResolved(){
         resolved = true;
     }
@@ -55,6 +85,10 @@ public abstract class Complaint extends Submission {
         else throw new CustomerNotFoundException(super.getCustomer().toString());
     }
 
+    /**
+     *
+     * @return
+     */
     private String actionsString(){
         StringBuilder sb = new StringBuilder("\n");
         actions.forEach(e -> sb.append(e.toString() + "\n"));
@@ -66,7 +100,10 @@ public abstract class Complaint extends Submission {
         return resolved;
     }
 
-
+    /**
+     *
+     * @return
+     */
     String ComplaintArchive() {
         StringBuilder sb = new StringBuilder();
         sb.append(super.customerArchive());

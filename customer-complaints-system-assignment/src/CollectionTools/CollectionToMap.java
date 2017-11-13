@@ -1,6 +1,9 @@
-package uk.co.christopherpritchard.CollectionTools;
+package CollectionTools;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A method to turn collections (lists and sets) into maps
