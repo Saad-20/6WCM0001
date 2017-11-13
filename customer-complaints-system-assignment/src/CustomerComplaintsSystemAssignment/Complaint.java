@@ -1,7 +1,7 @@
 package CustomerComplaintsSystemAssignment;
 import java.util.*;
 
-public class Complaint extends Submission {
+public abstract class Complaint extends Submission {
 
     private List<Action> actions;
     private Staff resolver;
@@ -58,6 +58,20 @@ public class Complaint extends Submission {
     private String actionsString(){
         StringBuilder sb = new StringBuilder("\n");
         actions.forEach(e -> sb.append(e.toString() + "\n"));
+        return sb.toString();
+    }
+
+    @Override
+    boolean isArchivable(){
+        return resolved;
+    }
+
+
+    String ComplaintArchive() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.customerArchive());
+        sb.append("NATURE COMPLAINT: " + super.getDescription() + "\n");
+        sb.append("DATE OF COMPLAINT: " + super.getDate().toString() + "\n");
         return sb.toString();
     }
 }

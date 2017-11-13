@@ -4,9 +4,9 @@ import java.util.List;
 //This is task 1
 
 /**
- * The CCS (Customer Complaints System) interface
+ * The CCS (Customer Complaints System) interface (task 1)
  * @author Chris Pritchard
- * @version 0.1
+ * @version 1.0
  */
 public interface CCS {
     /**

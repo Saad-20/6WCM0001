@@ -1,8 +1,12 @@
 package CustomerComplaintsSystemAssignment;
 
+import java.io.FileOutputStream;
 import java.util.*;
 import uk.co.christopherpritchard.CollectionTools.MapToCollection;
 
+/**
+ * CCS Implementation (extends the CCS interface and implements methods) - task 2
+ */
 public class CCSImplementation implements CCS{
 
     //using maps rather than lists or sets as want to be able to access entries by their IDs
@@ -10,6 +14,7 @@ public class CCSImplementation implements CCS{
     private Map<Integer, Submission> submissionMap;
     private Map<Integer, Customer> customerMap;
     private Map<Integer, Staff> staffMap;
+    private Map<Integer, Submission> archivedSubmissions;
 
     /**
      * Create's a new instance of the Customer Complaints System
@@ -19,6 +24,8 @@ public class CCSImplementation implements CCS{
         submissionMap = new HashMap<>();
         customerMap = new HashMap<>();
         staffMap = new HashMap<>();
+        //storing archived complaints in a map as well
+        archivedSubmissions = new HashMap<>();
     }
 
     @Override
@@ -33,7 +40,7 @@ public class CCSImplementation implements CCS{
 
     @Override
     public void addGeneralComplaint(int submissionId, int customerId, String description, Date date) {
-        submissionMap.put(submissionId, new Complaint(submissionId, customerMap.get(customerId), description, date));
+        submissionMap.put(submissionId, new GeneralComplaint(submissionId, customerMap.get(customerId), description, date));
     }
 
     @Override
@@ -53,7 +60,11 @@ public class CCSImplementation implements CCS{
 
     @Override
     public void archiveSubmissions() {
-        //TODO
+        submissionMap.forEach((k, v) -> {
+            if (v.isArchivable()){
+                archivedSubmissions.put(k, v);
+            }
+        });
     }
 
     @Override
@@ -150,4 +161,5 @@ public class CCSImplementation implements CCS{
     public void removeCustomer(int customerId) {
         customerMap.remove(customerId);
     }
+    W
 }

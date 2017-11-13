@@ -21,6 +21,9 @@ public class Staff extends Person {
 
     @Override
     public String toString() {
-        return super.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(super.toString());
+        sb.append(", Department: " + department + ", Role: " + role);
+        return sb.toString();
     }
 }

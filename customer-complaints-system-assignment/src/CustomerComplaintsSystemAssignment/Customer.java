@@ -1,6 +1,6 @@
 package CustomerComplaintsSystemAssignment;
 
-public class Customer extends Person{
+public class Customer extends Person implements java.io.Serializable{
     private String address;
     private String email;
     private String telephone;

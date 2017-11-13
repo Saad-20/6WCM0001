@@ -13,6 +13,19 @@ public class StaffComplaint extends Complaint {
 
     @Override
     public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Staff: \n");
+        sb.append(staff.toString() + "\n");
+        sb.append(super.toString());
         return super.toString();
+    }
+
+    @Override
+    void archive() {
+        StringBuilder sb = new StringBuilder("STAFF COMPLAINT");
+        sb.append(super.ComplaintArchive());
+        sb.append("STAFF NAME: " + staff.getName() + "\n");
+        sb.append("STAFF ID: " + staff.getId());
+        System.out.println(sb.toString());
     }
 }

@@ -1,6 +1,6 @@
 package CustomerComplaintsSystemAssignment;
 
-public abstract class Person implements ID{
+public abstract class Person implements ID, java.io.Serializable{
 
     private int id;
     private String name;
@@ -29,6 +29,8 @@ public abstract class Person implements ID{
 
     @Override
     public String toString() {
-        return super.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("ID: " + id + ", Name: " + name);
+        return sb.toString();
     }
 }

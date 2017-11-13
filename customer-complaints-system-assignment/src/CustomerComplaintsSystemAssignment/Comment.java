@@ -12,4 +12,13 @@ public class Comment extends Submission {
     public String toString() {
         return super.toString();
     }
+
+    @Override
+    void archive() {
+        StringBuilder sb = new StringBuilder("COMMENT");
+        sb.append(super.customerArchive());
+        sb.append("COMMENT: " + super.getDescription() + "\n");
+        sb.append("DATE OF COMMENT: " + super.getDate().toString() + "\n");
+        System.out.print(sb.toString());
+    }
 }

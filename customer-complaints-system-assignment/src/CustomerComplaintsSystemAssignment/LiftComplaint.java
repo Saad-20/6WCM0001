@@ -17,4 +17,13 @@ public class LiftComplaint extends Complaint {
         sb.append(", Floor: " + floor);
         return sb.toString();
     }
+
+    @Override
+    void archive(){
+        StringBuilder sb = new StringBuilder("LIFT COMPLAINT");
+        sb.append(super.ComplaintArchive());
+        sb.append("LIFT: " + lift + "\n");
+        sb.append("FLOOR: " + floor);
+        System.out.println(sb.toString());
+    }
 }
