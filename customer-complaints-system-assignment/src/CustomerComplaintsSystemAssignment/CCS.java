@@ -10,7 +10,7 @@ import java.util.List;
   */
 public interface CCS {
     /**
-     * Add a comment
+     * Add a comment!
      * @param submissionId The submission ID
      * @param customerId The customer ID
      * @param comment The description of the comment
